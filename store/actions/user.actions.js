@@ -17,8 +17,13 @@ export function login(credentials) {
 }
 
 
-export function signup(credentials) {
-    return userService.signup(credentials)
+export async function signup(credentials) {
+    const allUsers = await userService.query()
+    const isUsernameExists = allUsers.find(user =>
+         user.username === credentials.username)
+
+    if(!isUsernameExists){
+        return userService.signup(credentials)
         .then(user => {
             store.dispatch({ type: SET_USER, user })
             showSuccessMsg(`Welcome to the web ${credentials.username}!`)
@@ -27,6 +32,10 @@ export function signup(credentials) {
             showErrorMsg('Coundnt sign up..')
             throw err
         })
+    }
+    else showErrorMsg('Username Already existas')
+
+    
 }
 
 
@@ -39,4 +48,12 @@ export function logout() {
             console.log('user actions -> Cannot logout', err)
             throw err
         })
+}
+
+
+export async function addScore(score){
+    const user = store.getState().userModule.loggedInUser
+    const updatedUser = { ...user, balance: user.balance + score }
+    await userService.updateUser(updatedUser) 
+    store.dispatch({ type: SET_USER_SCORE, balance: updatedUser.balance })
 }

@@ -1,10 +1,17 @@
 import { todoService } from "../services/todo.service.js"
 import { showErrorMsg } from "../services/event-bus.service.js"
 
+import { loadTodos } from "../store/actions/todo.actions.js"
+
 const { useState, useEffect } = React
 const { useParams, useNavigate, Link } = ReactRouterDOM
+const { useSelector } = ReactRedux
+
 
 export function TodoDetails() {
+
+    const todos = useSelector(storeState =>
+         storeState.todoModule.todos)
 
     const [todo, setTodo] = useState(null)
     const params = useParams()
@@ -12,17 +19,13 @@ export function TodoDetails() {
 
     useEffect(() => {
         loadTodo()
-    }, [params.todoId])
+    }, [params.todoId, todos]) // todos get update within the header
 
 
-    function loadTodo() {
-        todoService.get(params.todoId)
-            .then(setTodo)
-            .catch(err => {
-                console.error('err:', err)
-                showErrorMsg('Cannot load todo')
-                navigate('/todo')
-            })
+    async function loadTodo() {
+        const thisTodo = todos.find(todo=>
+            todo._id === params.todoId)
+        setTodo(thisTodo)
     }
 
     function onBack() {

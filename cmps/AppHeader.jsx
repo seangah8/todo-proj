@@ -41,6 +41,8 @@ export function AppHeader() {
                     <p>Todos Progress: {todosPrecentage()}%</p>
                 </section>
 
+                {user ? <p>score: {user.balance}</p> : ''}
+
                 {user ? (
                     < section >
 
