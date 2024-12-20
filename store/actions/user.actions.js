@@ -1,13 +1,5 @@
 import { userService } from "../../services/user.service.js";
-<<<<<<< HEAD
-import { SET_USER, SET_USER_SCORE } from "../reducers/user.reducer.js";
-=======
-<<<<<<< HEAD
 import { SET_USER, SET_USER_SCORE, SET_USER_ACTIVITY } from "../reducers/user.reducer.js";
-=======
-import { SET_USER, SET_USER_SCORE } from "../reducers/user.reducer.js";
->>>>>>> 0dfc0722b07f2cabd81f41d2ec5567960059bedb
->>>>>>> 69ee785 (Reinitialize Git and add existing files)
 import { store } from "../store.js";
 import { showErrorMsg, showSuccessMsg } from '../../services/event-bus.service.js'
 
@@ -61,12 +53,6 @@ export function logout() {
 
 export async function addScore(score){
     const user = store.getState().userModule.loggedInUser
-<<<<<<< HEAD
-    const updatedUser = { ...user, balance: user.balance + score }
-    await userService.updateUser(updatedUser) 
-    store.dispatch({ type: SET_USER_SCORE, balance: updatedUser.balance })
-=======
-<<<<<<< HEAD
     const balance = user.balance + score
     const updatedUser = { ...user, balance}
     await userService.updateUser(updatedUser) 
@@ -80,10 +66,4 @@ export async function addActivity(txt){
          activities: [...user.activities, activity] }
     await userService.updateUser(updatedUser)
     store.dispatch({ type: SET_USER_ACTIVITY, activity})
-=======
-    const updatedUser = { ...user, balance: user.balance + score }
-    await userService.updateUser(updatedUser) 
-    store.dispatch({ type: SET_USER_SCORE, balance: updatedUser.balance })
->>>>>>> 0dfc0722b07f2cabd81f41d2ec5567960059bedb
->>>>>>> 69ee785 (Reinitialize Git and add existing files)
 }

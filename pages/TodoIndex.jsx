@@ -6,13 +6,7 @@ import { todoService } from "../services/todo.service.js"
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
 
 import { removeTodo, loadTodos } from '../store/actions/todo.actions.js'
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
 import { addActivity } from '../store/actions/user.actions.js'
-=======
->>>>>>> 0dfc0722b07f2cabd81f41d2ec5567960059bedb
->>>>>>> 69ee785 (Reinitialize Git and add existing files)
 import { SET_FILTER_BY } from '../store/reducers/todo.reducer.js'
 
 const { useEffect, useState } = React
@@ -35,22 +29,10 @@ export function TodoIndex() {
         setRemoveConfirmationTodo(todo)
     }
 
-<<<<<<< HEAD
-    function onRemoveTodo(todoId) {
-        if(todoId){
-            removeTodo(todoId)
-=======
-<<<<<<< HEAD
     function onRemoveTodo(todo) {
         if(todo){
             removeTodo(todo._id)
             addActivity(`removed todo: ${todo.txt}`)
-=======
-    function onRemoveTodo(todoId) {
-        if(todoId){
-            removeTodo(todoId)
->>>>>>> 0dfc0722b07f2cabd81f41d2ec5567960059bedb
->>>>>>> 69ee785 (Reinitialize Git and add existing files)
         }
     }
 
