@@ -1,5 +1,6 @@
 import { userService } from "../../services/user.service.js";
-import { SET_USER, SET_USER_SCORE, SET_USER_ACTIVITY } from "../reducers/user.reducer.js";
+import { SET_USER, SET_USER_SCORE, SET_USER_ACTIVITY,
+     SET_USER_USERNAME, SET_USER_PREFS } from "../reducers/user.reducer.js";
 import { store } from "../store.js";
 import { showErrorMsg, showSuccessMsg } from '../../services/event-bus.service.js'
 
@@ -66,4 +67,18 @@ export async function addActivity(txt){
          activities: [...user.activities, activity] }
     await userService.updateUser(updatedUser)
     store.dispatch({ type: SET_USER_ACTIVITY, activity})
+}
+
+export async function changeUsername(username) {
+    const user = store.getState().userModule.loggedInUser
+    const updatedUser = { ...user, username}
+    await userService.updateUser(updatedUser) 
+    store.dispatch({ type: SET_USER_USERNAME, username})  
+}
+
+export async function changePrefs(prefs) {
+    const user = store.getState().userModule.loggedInUser
+    const updatedUser = { ...user, prefs}
+    await userService.updateUser(updatedUser) 
+    store.dispatch({ type: SET_USER_PREFS, prefs})  
 }

@@ -34,7 +34,8 @@ function login({ username, password }) {
 function signup({ username, password, fullname }) {
     const time = Date.now()
     const user = { username, password, fullname,
-         balance: 0, activities: [{txt:'sign in', at: time}] }
+         balance: 0, activities: [{txt:'sign in', at: time}],
+         prefs: {color: 'black', bgColor: 'white'} }
     user.createdAt = user.updatedAt = time
     return storageService.post(STORAGE_KEY, user)
         .then(_setLoggedinUser)
@@ -55,8 +56,9 @@ function updateUser(user){
 }
 
 function _setLoggedinUser(user) {
-    const userToSave = { _id: user._id, fullname: user.fullname,
-        balance: user.balance, activities: user.activities
+    const userToSave = { _id: user._id, username: user.username,
+        balance: user.balance, activities: user.activities, 
+        prefs: user.prefs
     }
     sessionStorage.setItem(STORAGE_KEY_LOGGEDIN, JSON.stringify(userToSave))
     return userToSave

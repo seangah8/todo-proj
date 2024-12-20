@@ -17,6 +17,8 @@ export function TodoIndex() {
     const todos = useSelector(storeState => storeState.todoModule.todos)
     const isLoading = useSelector(storeState => storeState.todoModule.isLoading)
     const filterBy = useSelector(storeState => storeState.todoModule.filterBy)
+    const user = useSelector(storeState => storeState.userModule.loggedInUser)
+
     const dispatch = useDispatch()
 
     const [removeConfirmationTodo, setRemoveConfirmationTodo] = useState(null)
@@ -55,6 +57,9 @@ export function TodoIndex() {
     }
 
     if (isLoading) return <div>Loading...</div>
+
+    else if(!user) return <h1> No User Connected </h1>
+
     return (
         <section className="todo-index">
             

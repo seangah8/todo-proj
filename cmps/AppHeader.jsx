@@ -1,11 +1,8 @@
-const { useState, useEffect } = React
+const { useEffect } = React
 const { Link, NavLink } = ReactRouterDOM
-const { useNavigate } = ReactRouter
 
-import { userService } from '../services/user.service.js'
 import { UserMsg } from "./UserMsg.jsx"
 import { LoginSignup } from './LoginSignup.jsx'
-import { showErrorMsg } from '../services/event-bus.service.js'
 import { logout } from '../store/actions/user.actions.js'
 import { loadTodos } from '../store/actions/todo.actions.js'
 
@@ -14,7 +11,6 @@ const { useSelector } = ReactRedux
 
 
 export function AppHeader() {
-    const navigate = useNavigate()
     const user = useSelector(storeState => storeState.userModule.loggedInUser)
     const todos = useSelector(storeState => storeState.todoModule.todos)
 
@@ -46,7 +42,7 @@ export function AppHeader() {
                 {user ? (
                     < section >
 
-                        <Link to={`/user/${user._id}`}>Hello {user.fullname}</Link>
+                        <Link to={`/user/${user._id}`}>Hello {user.username}</Link>
                         <button onClick={logout}>Logout</button>
                     </ section >
                 ) : (
@@ -62,6 +58,7 @@ export function AppHeader() {
                     <NavLink to="/about" >About</NavLink>
                     <NavLink to="/todo" >Todos</NavLink>
                     <NavLink to="/dashboard" >Dashboard</NavLink>
+                    <NavLink to="/profile">Profile</NavLink>
                 </nav>
             </section>
             <UserMsg />
