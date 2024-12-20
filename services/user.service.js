@@ -21,7 +21,15 @@ function query() {
 function getById(userId) {
     return storageService.get(STORAGE_KEY, userId)
 }
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+ 
+=======
+
+>>>>>>> 0dfc0722b07f2cabd81f41d2ec5567960059bedb
+>>>>>>> 69ee785 (Reinitialize Git and add existing files)
 function login({ username, password }) {
     return storageService.query(STORAGE_KEY)
         .then(users => {
@@ -51,6 +59,13 @@ function getLoggedinUser() {
 
 function updateUser(user){
     storageService.put(STORAGE_KEY, user) 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+    _setLoggedinUser(user)
+=======
+>>>>>>> 0dfc0722b07f2cabd81f41d2ec5567960059bedb
+>>>>>>> 69ee785 (Reinitialize Git and add existing files)
 }
 
 function _setLoggedinUser(user) {
