@@ -11,8 +11,6 @@ import { TodoIndex } from "./pages/TodoIndex.jsx"
 import { TodoDetails } from "./pages/TodoDetails.jsx"
 import { TodoEdit } from "./pages/TodoEdit.jsx"
 import { UserDetails } from './pages/UserDetails.jsx'
-import { AboutTeam } from "./cmps/AboutTeam.jsx"
-import { AboutVision } from "./cmps/AboutVision.jsx"
 import { Dashboard } from "./pages/Dashboard.jsx"
 
 export function RootCmp() {
@@ -25,10 +23,7 @@ export function RootCmp() {
                     <main>
                         <Routes>
                             <Route path="/" element={<Home />} />
-                            <Route path="/about" element={<About />}>
-                                <Route path="team" element={<AboutTeam />} />
-                                <Route path="vision" element={<AboutVision />} />
-                            </Route>
+                            <Route path="/about" element={<About />} />
                             <Route path="/todo/:todoId" element={<TodoDetails />} />
                             <Route path="/todo/edit/:todoId" element={<TodoEdit />} />
                             <Route path="/todo/edit" element={<TodoEdit />} />
