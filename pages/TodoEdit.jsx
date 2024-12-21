@@ -67,7 +67,7 @@ export function TodoEdit() {
 
     if(!todoToEdit) return <p>Loading...</p>
 
-    const { txt, importance, isDone } = todoToEdit
+    const { txt, importance, isDone, color } = todoToEdit
 
     return (
         <section className="todo-edit">
@@ -86,6 +86,14 @@ export function TodoEdit() {
                 type="number" 
                 name="importance" 
                 id="importance" />
+
+                <label htmlFor="color">Importance:</label>
+                <input 
+                onChange={handleChange} 
+                value={color} 
+                type="color" 
+                name="color" 
+                id="color" />
 
                 <label htmlFor="isDone">isDone:</label>
                 <input 
