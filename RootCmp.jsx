@@ -12,6 +12,7 @@ import { TodoDetails } from "./pages/TodoDetails.jsx"
 import { TodoEdit } from "./pages/TodoEdit.jsx"
 import { UserDetails } from './pages/UserDetails.jsx'
 import { Dashboard } from "./pages/Dashboard.jsx"
+import { NotFound } from './pages/NotFound.jsx'
 
 export function RootCmp() {
 
@@ -30,6 +31,7 @@ export function RootCmp() {
                             <Route path="/todo" element={<TodoIndex />} />
                             <Route path="/dashboard" element={<Dashboard />} />
                             <Route path="/profile" element={<UserDetails/>}/>
+                            <Route path="*" element={<NotFound/>}/>
 
                         </Routes>
                     </main>
