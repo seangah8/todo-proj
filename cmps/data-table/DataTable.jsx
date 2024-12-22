@@ -4,11 +4,10 @@ export function DataTable({ todos, onRemoveTodo }) {
     return <table border="1" className="data-table">
         <thead>
             <tr>
-                <th style={{width: '1em'}}>&nbsp;</th>
-                <th style={{width: '5em'}}>Id</th>
                 <th>Text</th>
                 <th>Importance</th>
-                <th>Actions</th>
+                <th>Edit</th>
+                <th>IsDone</th>
             </tr>
         </thead>
         <tbody>

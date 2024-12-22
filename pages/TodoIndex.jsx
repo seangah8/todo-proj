@@ -75,20 +75,15 @@ export function TodoIndex() {
             <div>
                 <Link to="/todo/edit" className="btn" >Add Todo</Link>
             </div>
-
-            <h2>Todos List</h2>
             
             <RemoveConfirmation 
             todo = {removeConfirmationTodo}
             onRemoveTodo={onRemoveTodo} 
             onRemoveConfirmation={onRemoveConfirmation}/>
 
-            <TodoList todos={todos} onRemoveTodo={onRemoveConfirmation} onToggleTodo={onToggleTodo} />
-            <hr />
-            <h2>Todos Table</h2>
-            <div style={{ width: '60%', margin: 'auto' }}>
-                <DataTable todos={todos} onRemoveTodo={onRemoveConfirmation} />
-            </div>
+
+            <DataTable todos={todos} onRemoveTodo={onRemoveConfirmation} />
+
         </section>
     )
 }
