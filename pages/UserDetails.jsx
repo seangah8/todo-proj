@@ -1,13 +1,31 @@
 import { changeUsername, changePrefs } from '../store/actions/user.actions.js'
+import { logout } from '../store/actions/user.actions.js'
+import { LoginSignup } from '../cmps/LoginSignup.jsx'
 
 const { useSelector } = ReactRedux
-const { useState } = React
+const { useState, useEffect } = React
+
 
 
 export function UserDetails() {
 
     const user = useSelector(storeState => storeState.userModule.loggedInUser)
+    const todos = useSelector(storeState => storeState.todoModule.todos)
+
     const [userToEdite, setUserToEdite] = useState(user)
+
+    useEffect(() => {
+        setUserToEdite(user);
+    }, [user])
+
+    function todosPrecentage(){
+        if(todos.length <= 0) return 0
+        let doneTodos = 0
+        for(let i=0; i < todos.length; i++){
+            if(todos[i].isDone) doneTodos ++
+        }
+        return parseInt((doneTodos/todos.length) * 100)
+    }
 
     async function onSubmitChanges(ev){
         ev.preventDefault()
@@ -54,12 +72,19 @@ export function UserDetails() {
         }
     }
 
-    if(!user) return <h1>Please login to see profile..</h1>
+    if(!user || !userToEdite) return <LoginSignup/>
 
     const { username, prefs } = userToEdite
 
+
     return (
         <section className="user-detalis">
+
+            <button onClick={logout}>Logout</button>
+            <h1>Hello {user.username}</h1>
+            <p>Todos Progress: {todosPrecentage()}%</p>
+            <p>score: {user.balance}</p>
+
             <form onSubmit={onSubmitChanges}>
 
                 <label htmlFor="username">Username: </label>
@@ -91,7 +116,7 @@ export function UserDetails() {
 
             <ul>
                 {
-                    user.activities.reverse().map(act => {
+                    user.activities.map(act => {
 
                         const timeSince = simplifyTimeToStr(act.at)
 
@@ -102,6 +127,8 @@ export function UserDetails() {
                     })
                 }
             </ul>
-        </section>
+
+        </section>                               
+
     )
 }

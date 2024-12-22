@@ -1,10 +1,7 @@
-import { showSuccessMsg } from '../services/event-bus.service.js'
 import { userService } from '../services/user.service.js'
 import { login , signup } from '../store/actions/user.actions.js'
 
 const { useState } = React
-const { useSelector } = ReactRedux
-
 
 export function LoginSignup() {
 
@@ -58,7 +55,7 @@ export function LoginSignup() {
             </form>
 
             <div className="btns">
-                <a href="#" onClick={() => setIsSignUp(!isSignup)}>
+                <a onClick={() => setIsSignUp(!isSignup)}>
                     {!isSignup ?
                         'Already a member? Login' :
                         'New user? Signup here'

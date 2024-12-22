@@ -31,7 +31,7 @@ export function userReducer(state = initialState, cmd = {}) {
             return { 
                 ...state,
                 loggedInUser: { ...state.loggedInUser,
-                activities: [...state.loggedInUser.activities, cmd.activity] } 
+                activities: [cmd.activity, ...state.loggedInUser.activities] } 
             }
 
         case SET_USER_USERNAME:

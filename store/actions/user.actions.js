@@ -64,7 +64,7 @@ export async function addActivity(txt){
     const activity = {txt, at: Date.now()}
     const user = store.getState().userModule.loggedInUser
     const updatedUser = { ...user,
-         activities: [...user.activities, activity] }
+         activities: [activity, ...user.activities] }
     await userService.updateUser(updatedUser)
     store.dispatch({ type: SET_USER_ACTIVITY, activity})
 }
