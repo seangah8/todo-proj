@@ -5,7 +5,7 @@ import { RemoveConfirmation } from '../cmps/RemoveConfirmation.jsx'
 import { todoService } from "../services/todo.service.js"
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
 
-import { removeTodo, loadTodos, createDemoTodos } from '../store/actions/todo.actions.js'
+import { removeTodo, loadTodos, createDemoTodos, saveTodo } from '../store/actions/todo.actions.js'
 import { addActivity } from '../store/actions/user.actions.js'
 import { SET_FILTER_BY } from '../store/reducers/todo.reducer.js'
 
@@ -28,19 +28,19 @@ export function TodoIndex() {
     }, [filterBy])
 
 
-    function onRemoveConfirmation(todo) {
-        setRemoveConfirmationTodo(todo)
-    }
-
-    function onRemoveTodo(todo) {
+    function onDoneTodo(todo) {
         if(todo){
             removeTodo(todo._id)
-            addActivity(`removed todo: ${todo.txt}`)
+            addActivity(`Done: ${todo.txt}`)
         }
     }
 
     function onSetFilterBy(filterBy) {
         dispatch({ type: SET_FILTER_BY, filterBy })
+    }
+
+    function onSetTodo(todo){
+        saveTodo(todo)
     }
 
 
@@ -75,14 +75,9 @@ export function TodoIndex() {
             <div>
                 <Link to="/todo/edit" className="btn" >Add Todo</Link>
             </div>
-            
-            <RemoveConfirmation 
-            todo = {removeConfirmationTodo}
-            onRemoveTodo={onRemoveTodo} 
-            onRemoveConfirmation={onRemoveConfirmation}/>
 
 
-            <DataTable todos={todos} onRemoveTodo={onRemoveConfirmation} />
+            <DataTable todos={todos} onSetTodo={onSetTodo} onDoneTodo={onDoneTodo} />
 
         </section>
     )

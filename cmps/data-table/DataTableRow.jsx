@@ -1,18 +1,37 @@
+import { DataTableRowEdit } from './DataTableRowEdit.jsx'
+
 const { useState, Fragment } = React
 const { Link } = ReactRouterDOM
 
-export function DataTableRow({ todo, onRemoveTodo }) {
+export function DataTableRow({ todo, onDoneTodo, onSetTodo }) {
 
-    const [, setIsExpanded] = useState(false)
+    const [isExpanded, setIsExpanded] = useState(false)
+
+    function importanceToWord(number){
+        const importanceLevelStr = 
+        ['Optional', 'Relevant', 'Important', 'Essential', 'Critical']
+
+        return importanceLevelStr[number-1]
+    }
 
     return <Fragment>
         <tr>
             
             <td className={(todo.isDone)? 'done' : ''}>{todo.txt}</td>
-            <td>{todo.importance}</td>
-            <td><Link to={`/todo/edit/${todo._id}`}>Edit</Link></td>
-            <td onClick={() => {onRemoveTodo(todo)}}> Done</td>
+            <td>{importanceToWord(todo.importance)}</td>
+            <td  className="toggle-expand" 
+                onClick={() => {setIsExpanded(!isExpanded)}}>✏️
+            </td>
+            <td onClick={() => {onDoneTodo(todo)}}>✅</td>
         </tr>
+        {isExpanded && (
+                <tr className="edit-row">
+                    <td colSpan="5"> {/*makes the edit row exist
+                    the whole row*/}
+                        <DataTableRowEdit setIsExpanded={setIsExpanded} todo={todo} onSetTodo={onSetTodo}/>
+                    </td>
+                </tr>
+            )}
 
     </Fragment>
 }

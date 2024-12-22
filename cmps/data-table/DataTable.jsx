@@ -1,6 +1,6 @@
 import { DataTableRow } from "./DataTableRow.jsx"
 
-export function DataTable({ todos, onRemoveTodo }) {
+export function DataTable({ todos, onDoneTodo, onSetTodo }) {
     return <table border="1" className="data-table">
         <thead>
             <tr>
@@ -12,7 +12,11 @@ export function DataTable({ todos, onRemoveTodo }) {
         </thead>
         <tbody>
             {todos.map(todo =>
-                <DataTableRow key={todo._id} todo={todo} onRemoveTodo={onRemoveTodo} />)}
+                <DataTableRow 
+                key={todo._id} 
+                todo={todo} 
+                onSetTodo={onSetTodo} 
+                onDoneTodo={onDoneTodo} />)}
         </tbody>
     </table>
 }
