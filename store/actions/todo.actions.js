@@ -3,9 +3,10 @@ import { ADD_TODO, REMOVE_TODO, SET_TODOS, SET_IS_LOADING, UPDATE_TODO } from ".
 import { store } from "../store.js";
 
 export function loadTodos() {
+    const userId = store.getState().userModule.loggedInUser._id
     const filterBy = store.getState().todoModule.filterBy
     store.dispatch({ type: SET_IS_LOADING, isLoading: true })
-    return todoService.query(filterBy)
+    return todoService.query(userId, filterBy)
         .then(todos => {
             store.dispatch({ type: SET_TODOS, todos })
         })
@@ -17,6 +18,8 @@ export function loadTodos() {
             store.dispatch({ type: SET_IS_LOADING, isLoading: false })
         })
 }
+
+
 
 export function removeTodo(todoId) {
     return todoService.remove(todoId)

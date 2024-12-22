@@ -5,7 +5,7 @@ import { RemoveConfirmation } from '../cmps/RemoveConfirmation.jsx'
 import { todoService } from "../services/todo.service.js"
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
 
-import { removeTodo, loadTodos } from '../store/actions/todo.actions.js'
+import { removeTodo, loadTodos, createDemoTodos } from '../store/actions/todo.actions.js'
 import { addActivity } from '../store/actions/user.actions.js'
 import { SET_FILTER_BY } from '../store/reducers/todo.reducer.js'
 
@@ -24,8 +24,9 @@ export function TodoIndex() {
     const [removeConfirmationTodo, setRemoveConfirmationTodo] = useState(null)
 
     useEffect(() => {
-        loadTodos()
+        if(user) loadTodos()
     }, [filterBy])
+
 
     function onRemoveConfirmation(todo) {
         setRemoveConfirmationTodo(todo)
@@ -56,9 +57,16 @@ export function TodoIndex() {
             })
     }
 
-    if (isLoading) return <div>Loading...</div>
+    if(!user) return <h1> No User Connected </h1>
 
-    else if(!user) return <h1> No User Connected </h1>
+    else if (isLoading) return <div>Loading...</div>
+
+    else if(!todos.length) return (
+        <section className="todo-index">
+            <h1> No Todos To Do! </h1>
+            <Link to="/todo/edit" className="btn" >Add Todo</Link>
+        </section>  
+    )
 
     return (
         <section className="todo-index">
@@ -67,6 +75,7 @@ export function TodoIndex() {
             <div>
                 <Link to="/todo/edit" className="btn" >Add Todo</Link>
             </div>
+
             <h2>Todos List</h2>
             
             <RemoveConfirmation 

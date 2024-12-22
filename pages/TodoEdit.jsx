@@ -11,6 +11,7 @@ const { useSelector } = ReactRedux
 export function TodoEdit() {
 
     const [todoToEdit, setTodoToEdit] = useState(todoService.getEmptyTodo())
+    const user = useSelector(storeState => storeState.userModule.loggedInUser)
     const navigate = useNavigate()
     const params = useParams()
 
@@ -51,7 +52,7 @@ export function TodoEdit() {
 
     async function onSaveTodo(ev) {
         ev.preventDefault()
-        await saveTodo(todoToEdit)
+        await saveTodo({userId: user._id, ...todoToEdit})
         if(todoToEdit.isDone) {
             await addScore(10)
             addActivity(`complished todo: ${todoToEdit.txt}`)
@@ -87,7 +88,7 @@ export function TodoEdit() {
                 name="importance" 
                 id="importance" />
 
-                <label htmlFor="color">Importance:</label>
+                <label htmlFor="color">Color:</label>
                 <input 
                 onChange={handleChange} 
                 value={color} 

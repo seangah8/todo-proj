@@ -17,9 +17,12 @@ export const todoService = {
 // For Debug (easy access from console):
 window.cs = todoService
 
-function query(filterBy = {}) {
+function query(userId, filterBy = {}) {
     return storageService.query(TODO_KEY)
         .then(todos => {
+
+            todos = todos.filter(todo => todo.userId === userId)
+
             if (filterBy.txt) {
                 const regExp = new RegExp(filterBy.txt, 'i')
                 todos = todos.filter(todo => regExp.test(todo.txt))
