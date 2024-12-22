@@ -24,7 +24,7 @@ export function DataTableRow({ todo, onDoneTodo, onSetTodo }) {
             </td>
             <td onClick={() => {onDoneTodo(todo)}}>✅</td>
         </tr>
-        {isExpanded && (
+        {(todo.txt === '' || isExpanded) && (
                 <tr className="edit-row">
                     <td colSpan="5"> {/*makes the edit row exist
                     the whole row*/}

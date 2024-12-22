@@ -1,3 +1,5 @@
+import { showErrorMsg, showSuccessMsg } from "../../services/event-bus.service.js"
+
 const { useState } = React
 
 export function DataTableRowEdit({ todo, setIsExpanded, onSetTodo }){
@@ -14,8 +16,11 @@ export function DataTableRowEdit({ todo, setIsExpanded, onSetTodo }){
 
     function onSubmitTodo(ev){
         ev.preventDefault()
-        onSetTodo(todoToEdit)
-        setIsExpanded(false)
+        if(todoToEdit.txt !== ''){
+            onSetTodo(todoToEdit)
+            setIsExpanded(false)
+
+        } else showErrorMsg('Must contain content')
 
     }
 

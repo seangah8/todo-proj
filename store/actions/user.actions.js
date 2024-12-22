@@ -72,10 +72,17 @@ export async function addActivity(txt){
 }
 
 export async function changeUsername(username) {
+    const usersList = await userService.query()
     const user = store.getState().userModule.loggedInUser
-    const updatedUser = { ...user, username}
-    await userService.updateUser(updatedUser) 
-    store.dispatch({ type: SET_USER_USERNAME, username})  
+    const isUsernameExist = usersList.some(userli => { return(
+        (userli.username === username) && (user._id !== userli._id))})
+    if(isUsernameExist) {showErrorMsg('Username already taken')}
+    else{
+        const updatedUser = { ...user, username}
+        await userService.updateUser(updatedUser) 
+        store.dispatch({ type: SET_USER_USERNAME, username})
+    }
+      
 }
 
 export async function changePrefs(prefs) {

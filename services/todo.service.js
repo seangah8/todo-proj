@@ -2,7 +2,6 @@ import { utilService } from './util.service.js'
 import { storageService } from './async-storage.service.js'
 
 const TODO_KEY = 'todoDB'
-_createTodos()
 
 export const todoService = {
     query,
@@ -21,7 +20,11 @@ function query(userId, filterBy = {}) {
     return storageService.query(TODO_KEY)
         .then(todos => {
 
+            
+
             todos = todos.filter(todo => todo.userId === userId)
+
+            console.log(todos)
 
             if (filterBy.txt) {
                 const regExp = new RegExp(filterBy.txt, 'i')
@@ -38,6 +41,8 @@ function query(userId, filterBy = {}) {
                 else{
                     todos = todos.filter(todo =>todo.isDone)}
             }
+
+            
 
             return todos
         })
@@ -67,8 +72,8 @@ function save(todo) {
     }
 }
 
-function getEmptyTodo(txt = '', importance = 5) {
-    return { txt, importance, color:'#ffffff', isDone: false }
+function getEmptyTodo(txt = '', importance = 3) {
+    return { txt, importance }
 }
 
 function getDefaultFilter() {
@@ -93,26 +98,6 @@ function getImportanceStats() {
             return data
         })
 
-}
-
-function _createTodos() {
-    let todos = utilService.loadFromStorage(TODO_KEY)
-    if (!todos || !todos.length) {
-        todos = []
-        const txts = ['Learn React', 'Master CSS', 'Practice Redux']
-        for (let i = 0; i < 20; i++) {
-            const txt = txts[utilService.getRandomIntInclusive(0, txts.length - 1)]
-            todos.push(_createTodo(txt + (i + 1), utilService.getRandomIntInclusive(1, 10)))
-        }
-        utilService.saveToStorage(TODO_KEY, todos)
-    }
-}
-
-function _createTodo(txt, importance) {
-    const todo = getEmptyTodo(txt, importance)
-    todo._id = utilService.makeId()
-    todo.createdAt = todo.updatedAt = Date.now() - utilService.getRandomIntInclusive(0, 1000 * 60 * 60 * 24)
-    return todo
 }
 
 function _setNextPrevTodoId(todo) {
