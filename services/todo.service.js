@@ -48,9 +48,6 @@ function query(userId, filterBy = {}) {
                 }
                 todos = finalTodoList
             }
-
-            
-
             return todos
         })
 }
@@ -97,14 +94,10 @@ function getFilterFromSearchParams(searchParams) {
 }
 
 
-function getImportanceStats() {
-    return storageService.query(TODO_KEY)
-        .then(todos => {
-            const todoCountByImportanceMap = _getTodoCountByImportanceMap(todos)
-            const data = Object.keys(todoCountByImportanceMap).map(speedName => ({ title: speedName, value: todoCountByImportanceMap[speedName] }))
-            return data
-        })
-
+function getImportanceStats(todos) {
+    const todoCountByImportanceMap = _getTodoCountByImportanceMap(todos)
+    const data = Object.keys(todoCountByImportanceMap).map(speedName => ({ title: speedName, value: todoCountByImportanceMap[speedName] }))
+    return data
 }
 
 function _setNextPrevTodoId(todo) {
@@ -119,23 +112,21 @@ function _setNextPrevTodoId(todo) {
 }
 
 function _getTodoCountByImportanceMap(todos) {
+
     const todoCountByImportanceMap = todos.reduce((map, todo) => {
-        if (todo.importance < 3) map.low++
-        else if (todo.importance < 7) map.normal++
+        if (todo.importance <= 2) map.low ++
+        else if (todo.importance <= 4) map.normal ++
         else map.urgent++
         return map
     }, { low: 0, normal: 0, urgent: 0 })
+
+    for (const key in todoCountByImportanceMap) {
+        todoCountByImportanceMap[key] *= 100 / todos.length
+        todoCountByImportanceMap[key] = 
+            parseInt(todoCountByImportanceMap[key])
+    }
+
     return todoCountByImportanceMap
 }
 
-
-// Data Model:
-// const todo = {
-//     _id: "gZ6Nvy",
-//     txt: "Master Redux",
-//     importance: 9,
-//     isDone: false,
-//     createdAt: 1711472269690,
-//     updatedAt: 1711472269690
-// }
 

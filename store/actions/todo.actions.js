@@ -2,9 +2,7 @@ import { todoService } from "../../services/todo.service.js";
 import { ADD_TODO, REMOVE_TODO, SET_TODOS, SET_IS_LOADING, UPDATE_TODO } from "../reducers/todo.reducer.js";
 import { store } from "../store.js";
 
-export function loadTodos() { 
-    const userId = store.getState().userModule.loggedInUser._id
-    const filterBy = store.getState().todoModule.filterBy
+export function loadTodos(userId, filterBy) { 
     store.dispatch({ type: SET_IS_LOADING, isLoading: true })
     return todoService.query(userId, filterBy)
         .then(todos => {
@@ -20,7 +18,6 @@ export function loadTodos() {
 }
 
 
-
 export function removeTodo(todoId) {
     return todoService.remove(todoId)
         .then(() => {
@@ -33,11 +30,9 @@ export function removeTodo(todoId) {
 }
 
 export function saveTodo(todo) {
-
     const type = todo._id ? UPDATE_TODO : ADD_TODO
     return todoService.save(todo)
         .then((savedTodo) => {
-            console.log(savedTodo)
             store.dispatch({ type, todo: savedTodo })
             return savedTodo
         })

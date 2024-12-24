@@ -1,10 +1,9 @@
 import { TodoFilter } from "../cmps/TodoFilter.jsx"
 import { DataTable } from "../cmps/data-table/DataTable.jsx"
+import { Dashboard } from "../cmps/Dashboard.jsx"
 import { todoService } from "../services/todo.service.js"
-import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
-
 import { removeTodo, loadTodos, saveTodo } from '../store/actions/todo.actions.js'
-import { addActivity } from '../store/actions/user.actions.js'
+import { updateUser } from '../store/actions/user.actions.js'
 import { SET_FILTER_BY } from '../store/reducers/todo.reducer.js'
 
 const { useEffect } = React
@@ -19,13 +18,16 @@ export function TodoIndex() {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        if(user) loadTodos()
+        if(user) loadTodos(user._id, filterBy)
     }, [filterBy])
 
-    function onDoneTodo(todo) {
+    async function onDoneTodo(todo) {
         if(todo){
-            removeTodo(todo._id)
-            addActivity(`Done: ${todo.txt}`)
+            await removeTodo(todo._id)
+            // Local variables like user don’t react
+            // to Redux state updates
+            const updatedUser = await addScore(10) 
+            addActivity(`Done: ${todo.txt}`, updatedUser)
         }
     }
 
@@ -42,6 +44,20 @@ export function TodoIndex() {
         saveTodo({userId: user._id, ...newTodo})
     }
 
+    function addActivity(txt, user){
+        const activity = {txt, at: Date.now()}
+        const updatedUser = { ...user,
+                activities: [activity, ...user.activities] }
+        updateUser(updatedUser)
+    }
+
+    async function addScore(score){
+        const balance = user.balance + score
+        const updatedUser = { ...user, balance}
+        await updateUser(updatedUser)
+        return updatedUser
+    }
+
 
     if(!user) return <h1> No User Connected </h1>
 
@@ -56,9 +72,14 @@ export function TodoIndex() {
 
             {
                 todos?
-                <DataTable todos={todos} onSetTodo={onSetTodo} onDoneTodo={onDoneTodo} />
+                <div>
+                    <DataTable todos={todos} onSetTodo={onSetTodo} onDoneTodo={onDoneTodo} />
+                    <Dashboard todos={todos}/>
+                </div>
                 : <h3>Add Things Todo!</h3>
             }
+
+            
 
 
         </section>

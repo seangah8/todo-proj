@@ -1,6 +1,9 @@
-import { changeUsername, changePrefs } from '../store/actions/user.actions.js'
+import { updateUser } from '../store/actions/user.actions.js'
 import { logout } from '../store/actions/user.actions.js'
 import { LoginSignup } from '../cmps/LoginSignup.jsx'
+import { userService } from '../services/user.service.js'
+import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
+
 
 const { useSelector } = ReactRedux
 const { useState, useEffect } = React
@@ -10,7 +13,6 @@ const { useState, useEffect } = React
 export function UserDetails() {
 
     const user = useSelector(storeState => storeState.userModule.loggedInUser)
-    const todos = useSelector(storeState => storeState.todoModule.todos)
 
     const [userToEdite, setUserToEdite] = useState(user)
 
@@ -18,19 +20,10 @@ export function UserDetails() {
         setUserToEdite(user);
     }, [user])
 
-    function todosPrecentage(){
-        if(todos.length <= 0) return 0
-        let doneTodos = 0
-        for(let i=0; i < todos.length; i++){
-            if(todos[i].isDone) doneTodos ++
-        }
-        return parseInt((doneTodos/todos.length) * 100)
-    }
-
     async function onSubmitChanges(ev){
         ev.preventDefault()
-        await changeUsername(userToEdite.username)
-        changePrefs(userToEdite.prefs)
+        const updatedUser = await changeUsername(userToEdite.username)
+        changePrefs(userToEdite.prefs, updatedUser)
     }
 
     function handleUsernameChange({ target }){
@@ -72,6 +65,24 @@ export function UserDetails() {
         }
     }
 
+    async function changeUsername(username){
+        const usersList = await userService.query()
+        const isUsernameExist = usersList.some(userli => { return(
+            (userli.username === username) && (user._id !== userli._id))})
+        if(isUsernameExist) {showErrorMsg('Username already taken')}
+        else{
+            const updatedUser = { ...user, username}
+            updateUser(updatedUser) 
+            return updatedUser
+        }
+
+    }
+
+    async function changePrefs(prefs, user) {
+        const updatedUser = { ...user, prefs}
+        updateUser(updatedUser)       
+    }
+
     if(!user || !userToEdite) return <LoginSignup/>
 
     const { username, prefs } = userToEdite
@@ -82,7 +93,6 @@ export function UserDetails() {
 
             <button onClick={logout}>Logout</button>
             <h1>Hello {user.username}</h1>
-            <p>Todos Progress: {todosPrecentage()}%</p>
             <p>score: {user.balance}</p>
 
             <form onSubmit={onSubmitChanges}>

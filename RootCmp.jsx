@@ -9,7 +9,6 @@ import { Home } from "./pages/Home.jsx"
 import { About } from "./pages/About.jsx"
 import { TodoIndex } from "./pages/TodoIndex.jsx"
 import { UserDetails } from './pages/UserDetails.jsx'
-import { Dashboard } from "./pages/Dashboard.jsx"
 import { NotFound } from './pages/NotFound.jsx'
 
 export function RootCmp() {
@@ -24,7 +23,6 @@ export function RootCmp() {
                             <Route path="/" element={<Home />} />
                             <Route path="/about" element={<About />} />
                             <Route path="/todo" element={<TodoIndex />} />
-                            <Route path="/dashboard" element={<Dashboard />} />
                             <Route path="/profile" element={<UserDetails/>}/>
                             <Route path="*" element={<NotFound/>}/>
 
