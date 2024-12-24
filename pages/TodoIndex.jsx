@@ -22,7 +22,6 @@ export function TodoIndex() {
         if(user) loadTodos()
     }, [filterBy])
 
-
     function onDoneTodo(todo) {
         if(todo){
             removeTodo(todo._id)
@@ -43,6 +42,7 @@ export function TodoIndex() {
         saveTodo({userId: user._id, ...newTodo})
     }
 
+
     if(!user) return <h1> No User Connected </h1>
 
     else if (isLoading) return <div>Loading...</div>
@@ -51,12 +51,13 @@ export function TodoIndex() {
         <section className="todo-index">
 
             <TodoFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
+            
             <button onClick={addNewTodo}>Add Todo</button>
 
             {
-                todos.length?
+                todos?
                 <DataTable todos={todos} onSetTodo={onSetTodo} onDoneTodo={onDoneTodo} />
-                : ''
+                : <h3>Add Things Todo!</h3>
             }
 
 

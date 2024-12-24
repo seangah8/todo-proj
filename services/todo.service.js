@@ -20,26 +20,33 @@ function query(userId, filterBy = {}) {
     return storageService.query(TODO_KEY)
         .then(todos => {
 
-            
 
             todos = todos.filter(todo => todo.userId === userId)
+            
 
-            console.log(todos)
+            if(filterBy.orderBy){
+                let finalTodoList = []
+                if(filterBy.orderBy === 'date'){
+                    while (todos.length > 0){
+                        let earliestIndex = 0
+                        for (let i = 1; i < todos.length; i++) {
+                            if (todos[i].createdAt < todos[earliestIndex].createdAt) {
+                                earliestIndex = i
+                            }}
+                        finalTodoList.push(todos[earliestIndex])
+                        todos.splice(earliestIndex, 1)
+                    }
+                }
+                if(filterBy.orderBy === 'importance'){
+                    const importanceTodoArray = [[], [], [], [], []]
+                    todos.forEach(todo => {
+                        importanceTodoArray[todo.importance - 1].push(todo)})
 
-            if (filterBy.txt) {
-                const regExp = new RegExp(filterBy.txt, 'i')
-                todos = todos.filter(todo => regExp.test(todo.txt))
-            }
-
-            if (filterBy.importance) {
-                todos = todos.filter(todo => todo.importance >= filterBy.importance)
-            }
-
-            if(filterBy.status !== 'all'){
-                if(filterBy.status === 'active'){
-                    todos = todos.filter(todo =>!todo.isDone)}
-                else{
-                    todos = todos.filter(todo =>todo.isDone)}
+                    finalTodoList = [...importanceTodoArray[4],
+                    ...importanceTodoArray[3], ...importanceTodoArray[2], 
+                    ...importanceTodoArray[1], ...importanceTodoArray[0]]
+                }
+                todos = finalTodoList
             }
 
             
@@ -72,12 +79,12 @@ function save(todo) {
     }
 }
 
-function getEmptyTodo(txt = '', importance = 3) {
+function getEmptyTodo(txt='', importance = 3) {
     return { txt, importance }
 }
 
 function getDefaultFilter() {
-    return { txt: '', importance: 0, status: 'all'}
+    return { orderBy: 'date'}
 }
 
 function getFilterFromSearchParams(searchParams) {
