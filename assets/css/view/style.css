@@ -1,0 +1,34 @@
+.login-signup {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(161, 161, 234);
+}
+.login-signup .window {
+  display: grid;
+  align-content: space-around;
+  border: solid black 2px;
+  width: 20vw;
+  height: 60vh;
+  grid-template-rows: 2fr 3fr 2fr;
+}
+.login-signup .window h3 {
+  text-align: center;
+  align-content: center;
+}
+.login-signup .window form {
+  display: grid;
+  align-content: space-around;
+}
+.login-signup .window form input {
+  text-align: center;
+}
+.login-signup .window .switch {
+  background-color: rgb(234, 161, 161);
+  text-align: center;
+  align-content: center;
+}
+
+/*# sourceMappingURL=style.css.map */
