@@ -1,15 +1,13 @@
+/* Links */
 @import url("https://fonts.googleapis.com/css2?family=Audiowide&family=Gravitas+One&family=Knewave&family=Pacifico&family=Yellowtail&display=swap");
-body {
-  font-family: Audiowide;
-  color: rgb(231, 136, 21);
-  background-color: rgb(34, 34, 34);
-}
-
+/* Setup */
+/* Components */
 .todo-index {
   display: grid;
   grid-template-columns: 3fr 2fr;
 }
 .todo-index .todos {
+  position: relative;
   display: grid;
 }
 .todo-index .todos .todo-filter {
@@ -28,14 +26,16 @@ body {
   border-radius: 10px;
 }
 .todo-index .todos .add-todo {
+  margin-top: -56px;
+  justify-self: end;
+  top: 0px;
   cursor: pointer;
-  width: 4vw;
-  height: 4vw;
+  width: 56px;
+  height: 56px;
   border: none;
-  border-radius: 50%;
   color: rgb(231, 136, 21);
   background-color: rgb(64, 64, 64);
-  font-size: 3.5rem;
+  font-size: 3rem;
 }
 .todo-index .todos .add-todo:hover {
   background-color: rgb(84, 84, 84);
@@ -82,60 +82,18 @@ body {
   background-color: rgb(231, 136, 21);
   border: solid rgb(34, 34, 34) 2px;
   border-radius: 5px;
-  margin-right: 10px;
+  margin-left: 10px;
+}
+.todo-index .todos .data-table .data-table-row-edit input:hover, .todo-index .todos .data-table .data-table-row-edit select:hover, .todo-index .todos .data-table .data-table-row-edit button:hover {
+  background-color: rgb(186, 122, 45);
 }
 .todo-index .todos .data-table .data-table-row-edit button {
   color: rgb(231, 136, 21);
   background-color: rgb(64, 64, 64);
   border-color: rgb(231, 136, 21);
 }
-.todo-index .dashboard {
-  position: relative;
-}
-.todo-index .dashboard h2 {
-  justify-self: center;
-}
-.todo-index .dashboard .dashboard-and-title {
-  position: fixed;
-  top: 5vh;
-}
-.todo-index .chart {
-  display: table;
-  table-layout: fixed;
-  width: 60%;
-  max-width: 700px;
-  height: 300px;
-  margin: 0 auto;
-  margin-bottom: 2em;
-  background-image: linear-gradient(to top, rgb(64, 64, 64), rgba(0, 0, 0, 0) 5%);
-  background-size: 100% 50px;
-  background-position: left top;
-}
-.todo-index .chart li {
-  position: relative;
-  display: table-cell;
-  vertical-align: bottom;
-  height: 200px;
-  text-align: center;
-}
-.todo-index .chart span {
-  justify-self: center;
-  margin: 0px;
-  width: 5vw;
-  display: block;
-  color: rgb(34, 34, 34);
-  background-color: rgb(231, 136, 21);
-  animation: draw 1s ease-in-out;
-}
-.todo-index .chart span:before {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 100%;
-  padding-top: 5px 1em 0;
-  text-align: center;
-  content: attr(title);
-  color: rgb(231, 136, 21);
+.todo-index .todos .data-table .data-table-row-edit button:hover {
+  background-color: rgb(40, 40, 40);
 }
 
 .login-signup {
@@ -169,6 +127,72 @@ body {
   background-color: rgb(34, 34, 34);
   text-align: center;
   align-content: center;
+}
+
+.dashboard {
+  position: relative;
+}
+.dashboard h2 {
+  justify-self: center;
+}
+.dashboard .dashboard-and-title {
+  position: fixed;
+  top: 5vh;
+}
+
+.chart {
+  display: table;
+  table-layout: fixed;
+  width: 60%;
+  max-width: 700px;
+  height: 300px;
+  margin: 0 auto;
+  margin-bottom: 2em;
+  background-image: linear-gradient(to top, rgb(64, 64, 64), rgba(0, 0, 0, 0) 5%);
+  background-size: 100% 50px;
+  background-position: left top;
+}
+.chart li {
+  position: relative;
+  display: table-cell;
+  vertical-align: bottom;
+  height: 200px;
+  text-align: center;
+}
+.chart span {
+  justify-self: center;
+  margin: 0px;
+  width: 5vw;
+  display: block;
+  color: rgb(34, 34, 34);
+  background-color: rgb(231, 136, 21);
+  animation: draw 1s ease-in-out;
+}
+.chart span:before {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  padding-top: 5px 1em 0;
+  text-align: center;
+  content: attr(title);
+  color: rgb(231, 136, 21);
+}
+
+.user-msg {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  color: rgb(34, 34, 34);
+  background-color: rgb(231, 136, 21);
+  padding: 20px;
+  font-size: 1.25rem;
+}
+
+body {
+  font-family: Audiowide;
+  color: rgb(231, 136, 21);
+  background-color: rgb(34, 34, 34);
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -26,7 +26,7 @@ export function UserMsg() {
     if (!msg) return null
 
     return (
-        <section className={"user-msg " + msg.type}>
+        <section className='user-msg' >
             <p>{msg.txt}</p>
         </section>
     )

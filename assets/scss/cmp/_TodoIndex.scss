@@ -1,0 +1,113 @@
+.todo-index{
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+
+    .todos{
+        position: relative;
+        display: grid;
+
+        .todo-filter{
+
+            font-size: 1.5rem;
+            color: $clr2;
+            background-color: $clr1;
+            padding: 10px;
+
+            select{
+                cursor: pointer;
+                font-size: 1.5rem;
+                font-family: Audiowide;
+                color: $clr2;
+                background-color: $clr1;
+                border: solid $clr2 2px;
+                border-radius: 10px;
+            }
+        }
+
+        .add-todo{
+            margin-top: -56px;
+            justify-self: end;
+            top:0px;
+            cursor: pointer;
+            width: 56px;
+            height: 56px;
+            border: none;
+            color: $clr1;
+            background-color: $clr4;
+            font-size: 3rem;
+
+            &:hover{
+                background-color: $clr3;
+            }
+        }
+
+        .data-table{
+            font-size: 1.25rem;
+            border: none;
+
+            
+            td {
+                border: solid $clr3 1px;
+                border-left: none;
+                border-right: none;
+                border-top: none;
+                height: 50px; 
+            }
+
+            .symbol{
+                text-align: center;
+                i{
+                    cursor: pointer;
+                    &:hover{
+                        color: $clr6;
+                    }
+                }
+            }
+
+            .importance {
+                width: 20%;
+                i{
+                    margin-left: 10px;
+                }
+
+            }
+            
+            .txt{
+                width: 70%;
+            }
+
+            .data-table-row-edit{
+                background-color: $clr4;
+                height: 100%;
+                align-content: center;
+                
+                input, select, button{
+                cursor: pointer;
+                font-size: 1.25rem;
+                font-family: Audiowide;
+                color: $clr2;
+                background-color: $clr1;
+                border: solid $clr2 2px;
+                border-radius: 5px;
+                margin-left: 10px;
+                &:hover{
+                    background-color: $clr6;
+                }
+                }
+
+                button{
+                    color: $clr1;
+                    background-color: $clr4;
+                    border-color: $clr1;
+
+                    &:hover{
+                        background-color: $clr5;
+                    }
+                }
+
+            }
+        }
+
+    }
+
+}

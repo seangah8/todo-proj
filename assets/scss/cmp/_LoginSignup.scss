@@ -1,0 +1,36 @@
+.login-signup{
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: $clr1;
+    .window{
+        display: grid;
+        align-content: space-around;
+        border: solid black 2px;
+        width: 20vw;
+        height: 60vh;
+        grid-template-rows: 2fr 3fr 2fr;
+        h3{
+            text-align: center;
+            align-content: center;
+
+        }
+        form{
+            display: grid;
+            align-content: space-around;
+            input{
+                text-align: center;
+            }
+    
+        }
+        .switch{
+            background-color: $clr2;
+            text-align: center;
+            align-content: center;
+            
+        }
+    }
+    
+}
