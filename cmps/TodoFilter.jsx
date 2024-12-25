@@ -21,7 +21,6 @@ export function TodoFilter({ filterBy, onSetFilterBy }) {
     const { orderBy } = filterByToEdit
     return (
         <section className="todo-filter">
-            <h2>Filter Todos</h2>
             <label htmlFor="order-by">Order By: </label>
             <select id="order-by" value={orderBy} name="orderBy" onChange={handleChange}>
                 <option value={'date'}>date</option>

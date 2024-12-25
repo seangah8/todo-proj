@@ -27,8 +27,9 @@ export function DataTableRowEdit({ todo, setIsExpanded, onSetTodo }){
     const { txt, importance } =  todoToEdit
 
     return (
+        
         <form onSubmit={onSubmitTodo} className="data-table-row-edit">
-
+            
             <input
             placeholder="Todo Text"
             type="txt"

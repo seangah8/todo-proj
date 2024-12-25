@@ -17,12 +17,21 @@ export function DataTableRow({ todo, onDoneTodo, onSetTodo }) {
     return <Fragment>
         <tr>
             
-            <td className={(todo.isDone)? 'done' : ''}>{todo.txt}</td>
-            <td>{importanceToWord(todo.importance)}</td>
-            <td  className="toggle-expand" 
-                onClick={() => {setIsExpanded(!isExpanded)}}>✏️
+            <td className='txt'>{todo.txt}</td>
+            <td className='importance'>
+                {[1,2,3,4,5].map(num => {
+                    if(todo.importance >= num) 
+                        return <i key={num} className="fa-solid fa-circle"></i>
+                })}
             </td>
-            <td onClick={() => {onDoneTodo(todo)}}>✅</td>
+            <td className='symbol'>
+                <i onClick={() => {setIsExpanded(!isExpanded)}} 
+                className="fa-solid fa-pen"></i>
+            </td>
+            <td className='symbol'>
+                <i onClick={() => {onDoneTodo(todo)}} 
+                className="fa-solid fa-check"></i>
+            </td>
         </tr>
         {(todo.txt === '' || isExpanded) && (
                 <tr className="edit-row">

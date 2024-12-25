@@ -66,18 +66,22 @@ export function TodoIndex() {
     return (
         <section className="todo-index">
 
-            <TodoFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
-            
-            <button onClick={addNewTodo}>Add Todo</button>
+            <section className="todos">
+                <TodoFilter filterBy={filterBy} onSetFilterBy={onSetFilterBy} />
+                
+                <button 
+                className="add-todo" 
+                onClick={addNewTodo}>+</button>
 
-            {
-                todos?
-                <div>
+                {
+                    todos?
                     <DataTable todos={todos} onSetTodo={onSetTodo} onDoneTodo={onDoneTodo} />
-                    <Dashboard todos={todos}/>
-                </div>
-                : <h3>Add Things Todo!</h3>
-            }
+                    : <h3>Add Things Todo!</h3>
+                }
+
+            </section>
+
+            {todos? <Dashboard todos={todos}/> : ''}
 
             
 

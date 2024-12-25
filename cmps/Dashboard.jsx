@@ -15,8 +15,10 @@ export function Dashboard({todos}) {
 
     return (
         <section className="dashboard">
-            <h2>Dashboard - By Importance</h2>
-            <Chart data={importanceStats} />
+            <div className="dashboard-and-title">
+                <h2>Dashboard - By Importance</h2>
+                <Chart data={importanceStats} />
+            </div>
         </section>
     )
 }
