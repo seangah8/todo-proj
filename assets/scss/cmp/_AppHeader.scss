@@ -1,0 +1,26 @@
+
+.header-container{
+    position: fixed;
+    top: 0px;
+    z-index: 1;
+    width: 100%;
+    background-color: $clr4;
+    height: 60px;
+    align-content: center;
+
+    .app-nav{
+        display: flex;
+        margin-left: 15vw;
+        gap: 10vw;
+        a{
+            color: $clr1; 
+            text-decoration: none;
+            &:hover{
+                color: $clr6;
+            }
+        }
+        .active{
+            color: $clr8;
+        }
+    }
+}

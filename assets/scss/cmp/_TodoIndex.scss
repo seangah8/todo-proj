@@ -3,8 +3,10 @@
     grid-template-columns: 3fr 2fr;
 
     .todos{
+        margin-top: 60px;
         position: relative;
         display: grid;
+        padding: 20px;
 
         .todo-filter{
 
@@ -21,6 +23,9 @@
                 background-color: $clr1;
                 border: solid $clr2 2px;
                 border-radius: 10px;
+                &:hover{
+                    background-color: $clr6;
+                }
             }
         }
 

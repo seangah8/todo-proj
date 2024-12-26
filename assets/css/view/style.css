@@ -7,8 +7,10 @@
   grid-template-columns: 3fr 2fr;
 }
 .todo-index .todos {
+  margin-top: 60px;
   position: relative;
   display: grid;
+  padding: 20px;
 }
 .todo-index .todos .todo-filter {
   font-size: 1.5rem;
@@ -24,6 +26,9 @@
   background-color: rgb(231, 136, 21);
   border: solid rgb(34, 34, 34) 2px;
   border-radius: 10px;
+}
+.todo-index .todos .todo-filter select:hover {
+  background-color: rgb(186, 122, 45);
 }
 .todo-index .todos .add-todo {
   margin-top: -56px;
@@ -137,7 +142,7 @@
 }
 .dashboard .dashboard-and-title {
   position: fixed;
-  top: 5vh;
+  top: 10vh;
 }
 
 .chart {
@@ -189,7 +194,33 @@
   font-size: 1.25rem;
 }
 
+.header-container {
+  position: fixed;
+  top: 0px;
+  z-index: 1;
+  width: 100%;
+  background-color: rgb(64, 64, 64);
+  height: 60px;
+  align-content: center;
+}
+.header-container .app-nav {
+  display: flex;
+  margin-left: 15vw;
+  gap: 10vw;
+}
+.header-container .app-nav a {
+  color: rgb(231, 136, 21);
+  text-decoration: none;
+}
+.header-container .app-nav a:hover {
+  color: rgb(186, 122, 45);
+}
+.header-container .app-nav .active {
+  color: rgb(222, 94, 39);
+}
+
 body {
+  margin: 0px;
   font-family: Audiowide;
   color: rgb(231, 136, 21);
   background-color: rgb(34, 34, 34);

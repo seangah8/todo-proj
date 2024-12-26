@@ -21,7 +21,7 @@ export function DataTableRow({ todo, onDoneTodo, onSetTodo }) {
             <td className='importance'>
                 {[1,2,3,4,5].map(num => {
                     if(todo.importance >= num) 
-                        return <i class="fa-solid fa-fire-flame-curved"></i>
+                        return <i key={num} className="fa-solid fa-fire-flame-curved"></i>
                 })}
             </td>
             <td className='symbol'>
